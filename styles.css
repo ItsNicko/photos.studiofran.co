@@ -59,116 +59,18 @@ button {
   padding: 38px clamp(24px, 5vw, 78px) 28px;
 }
 
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-  position: sticky;
-  top: 38px;
-  align-self: start;
-  min-height: calc(100vh - 66px);
-}
-
-.brand-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  min-height: 258px;
-  padding: 22px;
-  border: 1px solid var(--line);
-  background:
-    linear-gradient(
-      180deg,
-      rgba(17, 17, 15, 0.04) 24%,
-      rgba(17, 17, 15, 0.86) 100%
-    ),
-    #33362e;
-  transition: border-color 180ms ease;
-}
-
-.brand-card:hover {
-  border-color: var(--accent);
-}
-
-.brand-wordmark {
-  width: fit-content;
-  font-size: clamp(35px, 3.2vw, 50px);
-  font-weight: 600;
-  line-height: 0.83;
-  letter-spacing: -0.09em;
-}
-
-.brand-period,
-.mobile-brand span {
-  color: var(--accent);
-}
-
-.brand-caption,
-.eyebrow,
-.topbar,
-.page-footer,
-.sidebar-link {
+.topbar {
   font-family: "DM Mono", monospace;
   text-transform: uppercase;
   letter-spacing: 0.055em;
 }
 
-.brand-caption {
-  font-size: 10px;
-  color: #d3d1c7;
-}
-
-.sidebar-note {
-  width: 100%;
-  padding: 17px 18px 20px;
-  border: 1px solid var(--line);
-  background: rgba(25, 25, 22, 0.72);
-}
-
-.eyebrow {
-  margin: 0;
-  color: var(--accent);
-  font-size: 10px;
-  line-height: 1.5;
-}
-
-.sidebar-note p {
-  max-width: 180px;
-  margin: 15px 0 20px;
-  color: #c6c4bb;
-  font-family: Georgia, serif;
-  font-size: 18px;
-  line-height: 1.35;
-}
-
-.archive-count {
-  color: var(--muted);
-  font-family: "DM Mono", monospace;
-  font-size: 10px;
-  text-transform: uppercase;
-}
-
-.sidebar-link {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-top: auto;
-  padding: 14px 0;
-  border-top: 1px solid var(--line);
-  color: #c6c4bb;
-  font-size: 10px;
-  transition: color 180ms ease;
-}
-
-.sidebar-link:hover,
-.topbar-link:hover,
-.page-footer a:hover {
+.topbar-link:hover {
   color: var(--accent);
 }
 
 .main-content {
+  grid-column: 2;
   min-width: 0;
 }
 
@@ -206,12 +108,6 @@ body.gallery-page .topbar-link:focus-visible span {
   transform: translateX(-3px) rotate(180deg);
 }
 
-.mobile-brand {
-  display: none;
-  font-weight: 700;
-  font-size: 18px;
-}
-
 .view[hidden] {
   display: none;
 }
@@ -231,9 +127,7 @@ body.archive-page .site-shell {
   padding: 0;
 }
 
-body.archive-page .sidebar,
-body.archive-page .topbar,
-body.archive-page .page-footer {
+body.archive-page .topbar {
   display: none;
 }
 
@@ -296,6 +190,22 @@ body.archive-page .archive-entry:focus-visible {
   outline-offset: 2px;
 }
 
+body.archive-page .archive-contact {
+  position: fixed;
+  right: 16px;
+  bottom: 14px;
+  color: #aaa;
+  font-family: "Courier New", monospace;
+  font-size: 10px;
+  transition: color 160ms ease;
+}
+
+body.archive-page .archive-contact:hover,
+body.archive-page .archive-contact:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+}
+
 body.archive-page .social-links {
   display: flex;
   justify-content: space-between;
@@ -332,18 +242,6 @@ body.archive-page .social-icon svg {
   height: 100%;
 }
 
-.page-footer {
-  display: flex;
-  justify-content: space-between;
-  padding: 28px 0 4px;
-  color: var(--muted);
-  font-size: 9px;
-}
-
-.page-footer a {
-  color: var(--ink);
-}
-
 body.gallery-page {
   background: #000;
   overflow-x: hidden;
@@ -359,11 +257,8 @@ body.gallery-page .site-shell {
   padding: 38px 0 0;
 }
 
-body.gallery-page .sidebar {
-  visibility: hidden;
-}
-
 body.gallery-page .main-content {
+  grid-column: 2;
   width: 900px;
   max-width: 100%;
 }
@@ -384,12 +279,27 @@ body.gallery-page .topbar-link {
 
 body.gallery-page .topbar-link span {
   color: inherit;
-}
-
-body.gallery-page .mobile-brand,
-body.gallery-page .gallery-heading,
-body.gallery-page .gallery-footer {
-  display: none;
+  width: 12px;
+  height: 12px;
+  background: currentColor;
+  clip-path: polygon(
+    0 0,
+    12.5% 0,
+    12.5% 12.5%,
+    37.5% 12.5%,
+    37.5% 25%,
+    62.5% 25%,
+    62.5% 37.5%,
+    87.5% 37.5%,
+    87.5% 62.5%,
+    62.5% 62.5%,
+    62.5% 75%,
+    37.5% 75%,
+    37.5% 87.5%,
+    12.5% 87.5%,
+    12.5% 100%,
+    0 100%
+  );
 }
 
 body.gallery-page .gallery-view {
@@ -657,12 +567,8 @@ body.gallery-page .story-nav-link:focus-visible {
     padding: 20px 22px 24px;
   }
 
-  .sidebar {
-    display: none;
-  }
-
-  .mobile-brand {
-    display: inline-block;
+  .main-content {
+    grid-column: 1;
   }
 
   body.gallery-page .site-shell {

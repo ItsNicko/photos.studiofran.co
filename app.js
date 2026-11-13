@@ -1,18 +1,16 @@
 const storyMetadata = [
-  { slug: "boston-2026", title: "boston 2026", location: "Boston · 2026" },
+  { slug: "boston-2026", title: "boston-2026" },
   {
     slug: "isabella-stewart-gardner-2026",
     title: "isabella-stewart-gardner-2026",
-    location: "Isabella Stewart Gardner Museum · 2026",
   },
-  { slug: "state-fair-5k-2026", title: "state-fair-5k-2026", location: "State Fair 5K · 2026" },
+  { slug: "state-fair-5k-2026", title: "state-fair-5k-2026" },
   {
     slug: "fbla-san-antonio-2026",
     title: "fbla-san-antonio-2026",
-    location: "FBLA · San Antonio · 2026",
   },
-  { slug: "deca-nd-slc-2026", title: "deca-nd-slc-2026", location: "DECA · 2026" },
-  { slug: "mexico-2026", title: "mexico-2026", location: "Mexico · 2026" },
+  { slug: "deca-nd-slc-2026", title: "deca-nd-slc-2026" },
+  { slug: "mexico-2026", title: "mexico-2026" },
 ];
 
 let stories = [];
@@ -27,7 +25,6 @@ function renderArchive() {
     const link = document.createElement("a");
     link.className = "archive-entry";
     link.href = `#/${encodeURIComponent(story.slug)}`;
-    link.dataset.storySlug = story.slug;
 
     const title = document.createElement("span");
     title.className = "entry-title";
@@ -36,10 +33,6 @@ function renderArchive() {
     entries.append(link);
   });
   storyList.replaceChildren(entries);
-
-  const totalPhotos = stories.reduce((total, story) => total + story.photos.length, 0);
-  document.querySelector("#archive-count").textContent =
-    `${stories.length} stories · ${totalPhotos} frames`;
 }
 
 function renderStoryNavigation(activeStory) {
@@ -74,9 +67,7 @@ function showArchive() {
   document.body.classList.remove("gallery-page");
   archiveView.hidden = false;
   galleryView.hidden = true;
-  document.title = "Photo archive — Studio Fran";
-  document.querySelector("#topbar-label").textContent = "FIELD NOTES / 2024—26";
-  document.querySelector("#topbar-link").textContent = "ALL STORIES ↗";
+  document.title = "Photo archive - Studio Fran";
   window.scrollTo(0, 0);
 }
 
@@ -90,10 +81,11 @@ function showStory(story) {
   document.body.classList.add("gallery-page");
   archiveView.hidden = true;
   galleryView.hidden = false;
-  document.title = `${story.title} — Studio Fran`;
-  document.querySelector("#topbar-label").textContent = story.slug.toUpperCase();
+  document.title = `${story.title} - Studio Fran`;
+  document.querySelector("#topbar-label").textContent =
+    story.slug.toUpperCase();
   document.querySelector("#topbar-link").innerHTML =
-    'BACK TO ARCHIVE <span aria-hidden="true">▶</span>';
+    'BACK TO ARCHIVE <span aria-hidden="true"></span>';
   renderStoryNavigation(story);
 
   const thumbnailPanel = document.querySelector("#thumbnail-panel");
@@ -102,8 +94,10 @@ function showStory(story) {
     const button = document.createElement("button");
     button.className = "thumbnail";
     button.type = "button";
-    button.dataset.photoIndex = String(index);
-    button.setAttribute("aria-label", `Show photo ${index + 1}: ${photo.caption}`);
+    button.setAttribute(
+      "aria-label",
+      `Show photo ${index + 1}: ${photo.caption}`,
+    );
     button.addEventListener("click", () => selectPhoto(story, index));
 
     const image = document.createElement("img");
@@ -118,7 +112,7 @@ function showStory(story) {
 
   const photoDashes = document.querySelector("#photo-dashes");
   const dashes = document.createDocumentFragment();
-  story.photos.forEach((photo, index) => {
+  story.photos.forEach((_, index) => {
     const dash = document.createElement("span");
     dash.className = "photo-dash";
     dashes.append(dash);
@@ -126,7 +120,10 @@ function showStory(story) {
   photoDashes.replaceChildren(dashes);
 
   const hasPhotos = story.photos.length > 0;
-  photoDashes.setAttribute("aria-valuemax", String(Math.max(story.photos.length, 1)));
+  photoDashes.setAttribute(
+    "aria-valuemax",
+    String(Math.max(story.photos.length, 1)),
+  );
   photoDashes.setAttribute("aria-disabled", String(!hasPhotos));
   photoDashes.tabIndex = hasPhotos ? 0 : -1;
   photoDashes.onpointerdown = (event) => {
@@ -173,7 +170,10 @@ function showStory(story) {
         return;
     }
     event.preventDefault();
-    selectPhoto(story, Math.max(0, Math.min(nextIndex, story.photos.length - 1)));
+    selectPhoto(
+      story,
+      Math.max(0, Math.min(nextIndex, story.photos.length - 1)),
+    );
   };
 
   const galleryLayout = document.querySelector("#gallery-layout");
@@ -198,7 +198,9 @@ function selectPhotoFromPointer(story, event) {
   const start = firstBounds.left + firstBounds.width / 2;
   const end = lastBounds.left + lastBounds.width / 2;
   const progress = end === start ? 0 : (event.clientX - start) / (end - start);
-  const index = Math.round(Math.max(0, Math.min(progress, 1)) * (story.photos.length - 1));
+  const index = Math.round(
+    Math.max(0, Math.min(progress, 1)) * (story.photos.length - 1),
+  );
   selectPhoto(story, index);
 }
 
@@ -238,17 +240,29 @@ function selectPhoto(story, index) {
 async function initializeArchive() {
   const response = await fetch("./photos/manifest.json");
   if (!response.ok) {
-    throw new Error(`Could not load photos/manifest.json (${response.status}).`);
+    throw new Error(
+      `Could not load photos/manifest.json (${response.status}).`,
+    );
   }
 
   const photoManifest = await response.json();
-  if (!photoManifest || typeof photoManifest !== "object" || Array.isArray(photoManifest)) {
-    throw new Error("photos/manifest.json must contain an event-to-photos object.");
+  if (
+    !photoManifest ||
+    typeof photoManifest !== "object" ||
+    Array.isArray(photoManifest)
+  ) {
+    throw new Error(
+      "photos/manifest.json must contain an event-to-photos object.",
+    );
   }
 
-  const metadataBySlug = new Map(storyMetadata.map((story) => [story.slug, story]));
+  const metadataBySlug = new Map(
+    storyMetadata.map((story) => [story.slug, story]),
+  );
   const orderedSlugs = [
-    ...storyMetadata.map((story) => story.slug).filter((slug) => slug in photoManifest),
+    ...storyMetadata
+      .map((story) => story.slug)
+      .filter((slug) => slug in photoManifest),
     ...Object.keys(photoManifest)
       .filter((slug) => !metadataBySlug.has(slug))
       .sort((first, second) => first.localeCompare(second)),
@@ -265,7 +279,11 @@ async function initializeArchive() {
         throw new Error(`Invalid photo entry in photos/${slug}.`);
       }
       const { filename, caption } = entry;
-      if (typeof filename !== "string" || filename.includes("/") || filename.includes("\\")) {
+      if (
+        typeof filename !== "string" ||
+        filename.includes("/") ||
+        filename.includes("\\")
+      ) {
         throw new Error(`Invalid photo filename in photos/${slug}.`);
       }
 
@@ -279,7 +297,6 @@ async function initializeArchive() {
     const story = metadataBySlug.get(slug) || {
       slug,
       title: slug.replace(/-/g, " "),
-      location: slug.replace(/-/g, " "),
     };
     return { ...story, photos };
   });
@@ -298,7 +315,8 @@ function showPhotoLoadError(error) {
   const message = document.createElement("p");
   message.className = "archive-error";
   message.setAttribute("role", "alert");
-  message.textContent = "The photo archive could not load. Check photos/manifest.json.";
+  message.textContent =
+    "The photo archive could not load. Check photos/manifest.json.";
   storyList.replaceChildren(message);
 }
 

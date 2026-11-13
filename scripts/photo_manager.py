@@ -199,7 +199,7 @@ def remove_photos(
 class PhotoManager:
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
-        self.root.title("Studio Fran — Photo Manager")
+        self.root.title("Studio Fran - Photo Manager")
         self.root.geometry("1040x620")
         self.root.minsize(800, 480)
 
