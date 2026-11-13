@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#11110f" />
+    <meta
+      name="description"
+      content="A visual archive of places, people, and passing moments by Studio Fran."
+    />
+    <title>Photo archive — Studio Fran</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <aside class="sidebar" aria-label="Site information">
+        <a
+          class="brand-card"
+          href="#/"
+          aria-label="Studio Fran photo archive home"
+        >
+          <span class="brand-wordmark"
+            >studio<br />fran<span class="brand-period">.</span></span
+          >
+          <span class="brand-caption">photographs, collected</span>
+        </a>
+        <div class="sidebar-note">
+          <span class="eyebrow">THE ARCHIVE</span>
+          <p>Small stories from out there, kept close.</p>
+          <span class="archive-count" id="archive-count"></span>
+        </div>
+        <a class="sidebar-link" href="mailto:hello@studiofran.co">
+          <span>Have a story in mind?</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <a class="mobile-brand" href="#/">SF<span>.</span></a>
+          <p class="topbar-label" id="topbar-label">FIELD NOTES / 2024—26</p>
+          <a class="topbar-link" id="topbar-link" href="#/"
+            >ALL STORIES <span aria-hidden="true">↗</span></a
+          >
+        </header>
+
+        <section class="view" id="archive-view" aria-label="Photo archive">
+          <div class="archive-card">
+            <nav
+              class="story-list"
+              id="story-list"
+              aria-label="Photo stories"
+            ></nav>
+            <div class="social-links" aria-label="Social media">
+              <a
+                class="social-icon"
+                href="https://www.facebook.com/itsnickolasfranco/"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <circle cx="8" cy="8" r="8" fill="currentColor" />
+                  <path
+                    d="M9.3 14V8.7h1.8l.3-2.1H9.3V5.3c0-.6.2-1 1-1h1.2V2.4c-.2 0-.9-.1-1.7-.1-1.7 0-2.8 1-2.8 2.9v1.4H5.2v2.1H7V14h2.3Z"
+                    fill="#000"
+                  />
+                </svg>
+              </a>
+              <a
+                class="social-icon"
+                href="https://www.instagram.com/itsnickofranco/"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <rect
+                    x="1.5"
+                    y="1.5"
+                    width="13"
+                    height="13"
+                    rx="3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  />
+                  <circle
+                    cx="8"
+                    cy="8"
+                    r="3.1"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                  />
+                  <circle cx="12" cy="4.1" r="1" fill="currentColor" />
+                </svg>
+              </a>
+              <a
+                class="social-icon"
+                href="https://www.tiktok.com/@itsnickofranco"
+                aria-label="TikTok"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M9.1 1h2.2c.1 1.5 1 2.6 2.6 2.8v2.3a6.1 6.1 0 0 1-2.6-.8v5.1a4.2 4.2 0 1 1-4.2-4.2c.3 0 .6 0 .9.1v2.4a2 2 0 1 0 1.1 1.8V1Z"
+                  />
+                </svg>
+              </a>
+              <a
+                class="social-icon"
+                href="https://x.com/ItsNickoFranco"
+                aria-label="X"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg viewBox="0 0 16 16" aria-hidden="true">
+                  <path
+                    fill="currentColor"
+                    d="M12.6 1H15l-5.3 6.1L16 15h-4.7l-3.7-5-4.3 5H.9l5.7-6.5L1.3 1h4.8l3.3 4.5L12.6 1Zm-.8 12.5h1.3L5.1 2.4H3.7l8.1 11.1Z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="view gallery-view"
+          id="gallery-view"
+          aria-label="Photo story"
+          hidden
+        >
+          <div class="gallery-layout" id="gallery-layout">
+            <div class="featured-photo">
+              <div class="featured-frame">
+                <img id="featured-image" alt="" />
+              </div>
+              <div class="photo-scrubber">
+                <div
+                  class="photo-dashes"
+                  id="photo-dashes"
+                  role="slider"
+                  aria-label="Choose photo"
+                  aria-orientation="horizontal"
+                  aria-valuemin="1"
+                  aria-valuemax="1"
+                  aria-valuenow="1"
+                  tabindex="0"
+                ></div>
+              </div>
+            </div>
+            <p class="gallery-empty" id="gallery-empty" role="status" hidden>
+              No photos in this folder yet. Add photos with the desktop Photo
+              Manager.
+            </p>
+            <div
+              class="thumbnail-panel"
+              id="thumbnail-panel"
+              aria-label="Photos in this story"
+            ></div>
+          </div>
+          <nav
+            class="story-navigation"
+            id="story-navigation"
+            aria-label="All photo stories"
+          ></nav>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
