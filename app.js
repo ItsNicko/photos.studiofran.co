@@ -67,7 +67,7 @@ function showArchive() {
   document.body.classList.remove("gallery-page");
   archiveView.hidden = false;
   galleryView.hidden = true;
-  document.title = "Photo archive - Studio Fran";
+  document.title = "Photo archive - Studio Franco";
   window.scrollTo(0, 0);
 }
 
@@ -81,9 +81,9 @@ function showStory(story) {
   document.body.classList.add("gallery-page");
   archiveView.hidden = true;
   galleryView.hidden = false;
-  document.title = `${story.title} - Studio Fran`;
+  document.title = `${story.title} - Studio Franco`;
   document.querySelector("#topbar-label").textContent =
-    story.slug.toUpperCase();
+    `STUDIO FRANCO / ${story.slug.toUpperCase()}`;
   document.querySelector("#topbar-link").innerHTML =
     'BACK TO ARCHIVE <span aria-hidden="true"></span>';
   renderStoryNavigation(story);

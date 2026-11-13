@@ -146,9 +146,47 @@ body.archive-page .archive-card {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 250px;
-  padding: 28px 8px 8px;
+  height: 282px;
+  padding: 17px 10px 10px;
   border: 1px solid #747474;
+}
+
+body.archive-page .archive-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 16px;
+  color: #eee;
+}
+
+body.archive-page .archive-brand-mark {
+  display: block;
+  flex: 0 0 25px;
+  width: 25px;
+  height: 25px;
+}
+
+body.archive-page .archive-brand-copy {
+  display: grid;
+  gap: 3px;
+}
+
+body.archive-page .archive-brand-name,
+body.archive-page .archive-brand-subtitle {
+  font-family: "Courier New", monospace;
+  text-transform: uppercase;
+}
+
+body.archive-page .archive-brand-name {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+body.archive-page .archive-brand-subtitle {
+  color: #888;
+  font-size: 8px;
+  letter-spacing: 0.08em;
 }
 
 body.archive-page .story-list {
