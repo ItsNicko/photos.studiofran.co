@@ -11,6 +11,7 @@ const storyMetadata = [
   },
   { slug: "deca-nd-slc-2026", title: "deca-nd-slc-2026" },
   { slug: "mexico-2026", title: "mexico-2026" },
+  { slug: "mfa-2026", title: "mfa-2026" },
 ];
 
 let stories = [];
