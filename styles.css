@@ -690,10 +690,14 @@ body.archive-page .page-top-right-link:focus-visible {
 
 @media (max-width: 480px) {
   body.archive-page .page-top-right-link {
-    top: 8px;
-    right: 8px;
-    font-size: 9px;
-    padding: 3px 5px;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    min-height: 36px;
+    align-items: center;
+    padding: 0 10px;
+    background: #111;
+    font-size: 10px;
   }
 }
 
